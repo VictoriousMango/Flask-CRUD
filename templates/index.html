@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All the Best Cutie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand">
+                <h1>User List</h1>
+            </a>
+            <a class="btn btn-outline-warning" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                aria-controls="offcanvasExample">
+                Auto Generate users
+            </a>
+            <!-- <form action="/autoGenerate" method="POST">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" name="generateB" placeholder="Username" required>
+                    <div class="col">
+                        <button type="submit" class="btn btn-outline-success">Add User</button>
+                    </div>
+                </div>
+            </form> -->
+            <form action="/add" method="POST">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" name="username" placeholder="Username" required>
+                    </div>
+                    <div class="col">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-outline-success">Add User</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+
+
+    <table class="table">
+        <caption>Simple User List</caption>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">UserName</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Birth Place</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <form action="/update/{{ user.id }}" method="POST" style="display: inline;">
+                    </td>
+                    <td scope="row">{{user.id}}</td>
+                    <td><input type="text" class="form-control" name="username" value="{{ user.username }}" required>
+                    </td>
+                    <td><input type="email" class="form-control" name="email" value="{{ user.email }}" required></td>
+                    <td><input type="phone_number" class="form-control" name="phone_number"
+                            value="{{ user.phone_number }}" required></td>
+                    <td><input type="BirthPlace" class="form-control" name="BirthPlace" value="{{ user.BirthPlace }}"
+                            required></td>
+                    <td>
+                        <button type="submit" class="btn btn-outline-info">Update</button>
+                        <a href="/delete/{{ user.id }}">
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                        </a>
+                    </td>
+                </form>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <!-- Form for auto-generate -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Auto Generator</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form action="/autoGenerate" method="POST">
+                <!-- <input type="text" class="form-control" name="generateB" placeholder="Username" required>
+                <button type="submit" class="btn btn-outline-success">Generate</button> -->
+                <div class="input-group mb-3">
+                    <input type="number" min="0" class="form-control" name="generateB" placeholder="Username" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+                    <button class="btn btn-outline-success" type="submit" id="button-addon2">Generate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
